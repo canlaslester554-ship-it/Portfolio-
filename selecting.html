@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>selection</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #F2EAE0;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+        }
+
+        .box {
+            width: 140px;
+            height: 160px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .or {
+            margin: 0px;
+            font-weight: bold;
+        }
+        .box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background-color: #B4D3D9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box" onclick="clickBox('Ordering Food')">Ordering Food</div>
+    <div class="or">Or</div>
+    <div class="box" onclick="clickBox('Reservation')">Reservation</div>
+</div>
+
+<script>
+function clickBox(option) {
+    if (option === 'Ordering Food') {
+        window.location.href = "FO.html";
+    } else if (option === 'Reservation') {
+        window.location.href = "reservation.html";
+    }
+}
+</script>
+
+</body>
+</html>

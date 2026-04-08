@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F2EAE0;
+            padding: 20px;
+        }
+        div.container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            
+        }
+        .category-buttons{
+            text-align: center;
+        }
+        .proceed-btn {
+            display: block;
+            margin: 20px auto 0;
+        }
+        h2 {
+            text-align: center;
+        }
+        .category-buttons button,
+        #proceedBtn {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #9B8EC7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .category-buttons button:hover,
+        #proceedBtn:hover {
+            background-color: #BDA6CE;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        #menuList li button {
+            margin-left: 10px;
+            padding: 3px 8px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Food Menu</h2>
+<div class="container">
+    <div class="category-buttons">
+        <button onclick="showMenu('vegetable')">Vegetable</button>
+        <button onclick="showMenu('meat')">Meat</button>
+        <button onclick="showMenu('pork')">Pork</button>
+        <button onclick="showMenu('drinks')">Drinks</button>
+    </div>
+
+    <h3>Menu</h3>
+    <ul id="menuList"></ul>
+
+    <h3>Cart 🛒 (<span id="cartCount">0</span>)</h3>
+    <ul id="cartList"></ul>
+
+    <h3>Total: ₱<span id="total">0</span></h3>
+    <div class="category-buttons">
+        <button id="proceedBtn" onclick="proceed()">Proceed</button>
+    </div>
+</div>
+
+<script>
+const menu = [
+    { name: "Salad", category: "vegetable", price: 50 },
+    { name: "Grilled Veggies", category: "vegetable", price: 70 },
+
+    { name: "Chicken", category: "meat", price: 120 },
+    { name: "Beef", category: "meat", price: 150 },
+
+    { name: "Pork Adobo", category: "pork", price: 130 },
+    { name: "Pork BBQ", category: "pork", price: 110 },
+
+    { name: "Water", category: "drinks", price: 20 },
+    { name: "Soda", category: "drinks", price: 35 },
+    { name: "Juice", category: "drinks", price: 40 }
+];
+
+let cart = [];
+
+function showMenu(category) {
+    const list = document.getElementById("menuList");
+    list.innerHTML = "";
+
+    menu.forEach(item => {
+        if (item.category === category) {
+            const li = document.createElement("li");
+
+            li.innerHTML = `
+                ${item.name} - ₱${item.price}
+                <button onclick="addToCart('${item.name}')">Add</button>
+            `;
+
+            list.appendChild(li);
+        }
+    });
+}
+
+function addToCart(itemName) {
+    const item = menu.find(m => m.name === itemName);
+    cart.push(item);
+    updateCart();
+}
+
+function updateCart() {
+    const cartList = document.getElementById("cartList");
+    const cartCount = document.getElementById("cartCount");
+    const total = document.getElementById("total");
+
+    cartList.innerHTML = "";
+    let sum = 0;
+
+    cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - ₱${item.price}`;
+        cartList.appendChild(li);
+        sum += item.price;
+    });
+
+    cartCount.textContent = cart.length;
+    total.textContent = sum;
+}
+
+function proceed() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    window.location.href = "try.html";
+}
+</script>
+
+</body>
+</html>
